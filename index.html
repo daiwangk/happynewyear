@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year 2026!</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&family=Caveat:wght@400;500;600;700&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* Custom CSS Variables and Base Styles */
+        :root {
+            --cream: rgb(245, 245, 220);
+            --red: rgb(211, 47, 47);
+            --dark-red: rgb(153, 27, 27);
+        }
+        
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: radial-gradient(circle at 50% 50%, #0f172a 0%, #020617 100%);
+            height: 100vh;
+            width: 100vw;
+            font-family: 'Montserrat', sans-serif;
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23d32f2f' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E") 12 12, auto;
+        }
+        
+        /* Sky Gradient Background */
+        .sky-gradient {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, #0f172a 0%, #020617 100%);
+            z-index: 1;
+        }
+        
+        /* TV Noise Overlay */
+        .tv-noise-overlay {
+            position: fixed;
+            inset: 0;
+            background: url('https://media.giphy.com/media/oEI9uWUqWMrBK/giphy.gif');
+            opacity: 0.05;
+            z-index: 2;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+        
+        /* Star Blink Animation */
+        .star-blink {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: starPulse 3s infinite ease-in-out;
+        }
+        
+        @keyframes starPulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        /* Envelope Container */
+        .envelope-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 100;
+            perspective: 1000px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .envelope-container:hover {
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+        
+        .envelope-container:hover .envelope-body,
+        .envelope-container:hover .envelope-flap {
+            filter: brightness(1.1);
+        }
+        
+        .envelope {
+            width: 300px;
+            height: 200px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.01s;
+        }
+        
+        .envelope.open {
+            animation: openEnvelope 1.5s forwards;
+        }
+        
+        @keyframes openEnvelope {
+            0% {
+                transform: rotateX(0deg) rotateY(0deg);
+            }
+            50% {
+                transform: rotateX(-120deg) rotateY(0deg);
+            }
+            100% {
+                transform: rotateX(-180deg) rotateY(0deg) scale(0.8);
+                opacity: 0.3;
+            }
+        }
+        
+        /* Envelope Parts */
+        .envelope-body {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--red);
+            clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 50% 100%, 0% 70%);
+            border: 3px solid var(--dark-red);
+            transform-origin: bottom;
+        }
+        
+        .envelope-flap {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-red);
+            clip-path: polygon(0% 0%, 100% 0%, 50% 50%);
+            transform-origin: bottom;
+            border: 3px solid var(--dark-red);
+            z-index: 2;
+        }
+        
+        .envelope.open .envelope-flap {
+            animation: flapOpen 1.5s forwards;
+        }
+        
+        @keyframes flapOpen {
+            0% {
+                transform: rotateX(0deg);
+            }
+            100% {
+                transform: rotateX(180deg);
+            }
+        }
+        
+        /* Card Animation */
+        .card-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 50;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .card-wrapper.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .card {
+            position: relative;
+            width: 90%;
+            max-width: 400px;
+            height: 480px;
+            background: var(--cream);
+            border: 4px double var(--red);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            transform: translateY(400px);
+            opacity: 0;
+        }
+        
+        .card-animation {
+            animation: slideUpCard 1.5s 0.3s forwards cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        @keyframes slideUpCard {
+            0% {
+                transform: translateY(400px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        /* Card Background Pattern */
+        .card-pattern {
+            position: absolute;
+            inset: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/aged-paper.png');
+            opacity: 0.3;
+            border-radius: 8px;
+            pointer-events: none;
+        }
+        
+        /* Typography */
+        .font-title {
+            font-family: 'Mountains of Christmas', cursive;
+        }
+        
+        .font-handwritten {
+            font-family: 'Caveat', cursive;
+        }
+        
+        /* Card Content */
+        .card-content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .card-title {
+            font-family: 'Mountains of Christmas', cursive;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--red);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        
+        .card-subtitle {
+            font-family: 'Caveat', cursive;
+            font-size: 1.5rem;
+            color: #4b5563;
+            margin-bottom: 2rem;
+        }
+        
+        .card-footer {
+            width: 100%;
+            border-top: 2px solid #d1d5db;
+            padding-top: 1rem;
+            font-family: 'Caveat', cursive;
+            font-size: 1.25rem;
+            color: #374151;
+        }
+        
+        .card-footer-text {
+            font-size: 0.7rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 0.5rem;
+        }
+        
+        /* Sparkle Particles (2026) */
+        .sparkle {
+            position: fixed;
+            top: -20px;
+            color: #ff6b9d;
+            font-size: 16px;
+            font-weight: bold;
+            pointer-events: none;
+            z-index: 20;
+            opacity: 0.8;
+        }
+        
+        .sparkle-fall {
+            animation: snowFall linear infinite;
+        }
+        
+        @keyframes snowFall {
+            0% {
+                transform: translateY(-10vh);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+        
+        /* Rocket Firework Effects */
+        .rocket-container {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 30;
+            pointer-events: none;
+        }
+        
+        .realistic-rocket {
+            position: absolute;
+            width: 2px;
+            height: 60px;
+            z-index: 5;
+            bottom: 0;
+        }
+        
+        .rocket-spark-tail {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(to top, transparent, #fbbf24);
+            filter: blur(1px);
+        }
+        
+        .rocket-glow-head {
+            position: absolute;
+            top: 0;
+            width: 6px;
+            height: 6px;
+            background: #fff;
+            border-radius: 50%;
+            transform: translateX(-30%);
+            box-shadow: 0 0 15px 4px #fbbf24;
+        }
+        
+        .explosion-container {
+            position: absolute;
+            z-index: 6;
+        }
+        
+        .realistic-particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            filter: blur(0.5px);
+            box-shadow: 0 0 8px currentColor;
+        }
+        
+        .explosion-flash {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: flashFade 0.3s ease-out;
+        }
+        
+        @keyframes flashFade {
+            0% {
+                opacity: 1;
+                transform: scale(0.5);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(2);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .envelope {
+                width: 250px;
+                height: 170px;
+            }
+            
+            .card {
+                max-width: 350px;
+                height: 420px;
+                padding: 1.5rem;
+            }
+            
+            .card-title {
+                font-size: 1.5rem;
+            }
+            
+            .card-subtitle {
+                font-size: 1.25rem;
+            }
+        }
+        
+        /* Fade in animation for button/text */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s forwards;
+        }
+        
+        /* Page System */
+        .page {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(100%);
+            transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+            z-index: 40;
+        }
+        
+        .page.active {
+            opacity: 1;
+            pointer-events: all;
+            transform: translateX(0);
+        }
+        
+        .page.prev {
+            transform: translateX(-100%);
+        }
+        
+        /* Polaroid Flip Cards Section */
+        .polaroid-section {
+            padding: 100px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: var(--cream);
+        }
+        
+        .polaroid-section-title {
+            font-family: 'Mountains of Christmas', cursive;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1f2937;
+            text-align: center;
+            margin-bottom: 60px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .polaroid-cards-container {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            width: 100%;
+        }
+        
+        .polaroid-card-wrapper {
+            perspective: 1000px;
+            width: 300px;
+            height: 380px;
+            cursor: pointer;
+        }
+        
+        .polaroid-card {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+        
+        .polaroid-card.flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .polaroid-card-front,
+        .polaroid-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .polaroid-card-front {
+            background: white;
+            padding: 15px 15px 60px 15px;
+            transform: rotateY(0deg);
+        }
+        
+        .polaroid-card-back {
+            background: var(--cream);
+            padding: 30px;
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 3px solid var(--red);
+            border-radius: 8px;
+        }
+        
+        .polaroid-image-container {
+            width: 100%;
+            height: 250px;
+            background: #f3f4f6;
+            border-radius: 4px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .polaroid-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .polaroid-label {
+            font-family: 'Caveat', cursive;
+            font-size: 1.2rem;
+            color: #374151;
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .polaroid-back-content {
+            font-family: 'Caveat', cursive;
+            font-size: 1.5rem;
+            color: var(--red);
+            text-align: center;
+            line-height: 1.6;
+        }
+        
+        .polaroid-back-title {
+            font-family: 'Mountains of Christmas', cursive;
+            font-size: 1.8rem;
+            color: var(--red);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .polaroid-back-message {
+            font-size: 1.3rem;
+            color: #374151;
+            margin-top: 15px;
+        }
+        
+        .polaroid-emoji {
+            font-size: 2rem;
+            margin-top: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .polaroid-section-title {
+                font-size: 2rem;
+                margin-bottom: 40px;
+            }
+            
+            .polaroid-cards-container {
+                gap: 30px;
+            }
+            
+            .polaroid-card-wrapper {
+                width: 280px;
+                height: 360px;
+            }
+        }
+        
+        /* Songs Section with Cassette Tapes */
+        .songs-section {
+            padding: 100px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: var(--cream);
+        }
+        
+        .songs-section-title {
+            font-family: 'Mountains of Christmas', cursive;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1f2937;
+            text-align: center;
+            margin-bottom: 60px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cassettes-container {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            width: 100%;
+        }
+        
+        .cassette-wrapper {
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        
+        .cassette-tape {
+            position: relative;
+            width: 200px;
+            height: 130px;
+            background: #2d3748;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 3px solid #1a202c;
+        }
+        
+        .cassette-tape:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+        }
+        
+        .cassette-tape.glow {
+            animation: cassetteGlow 0.6s ease-in-out;
+            box-shadow: 0 0 20px rgba(211, 47, 47, 0.6), 0 0 40px rgba(211, 47, 47, 0.4);
+        }
+        
+        .cassette-tape.wiggle {
+            animation: cassetteWiggle 0.5s ease-in-out;
+        }
+        
+        @keyframes cassetteGlow {
+            0%, 100% {
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(211, 47, 47, 0.8), 0 0 60px rgba(211, 47, 47, 0.5);
+            }
+        }
+        
+        @keyframes cassetteWiggle {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(-5deg);
+            }
+            75% {
+                transform: rotate(5deg);
+            }
+        }
+        
+        /* Cassette Label */
+        .cassette-label {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            right: 15px;
+            height: 60px;
+            background: var(--cream);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #4a5568;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cassette-song-title {
+            font-family: 'Caveat', cursive;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--red);
+            text-align: center;
+            padding: 5px 10px;
+            line-height: 1.2;
+        }
+        
+        /* Cassette Reels */
+        .cassette-reels {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 30px;
+        }
+        
+        .cassette-reel {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #4a5568 0%, #2d3748 50%, #1a202c 100%);
+            border: 2px solid #1a202c;
+            position: relative;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .cassette-reel::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background: #1a202c;
+            border-radius: 50%;
+        }
+        
+        .cassette-reel::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 2px;
+            background: #1a202c;
+            border-radius: 1px;
+        }
+        
+        .cassette-tape.playing .cassette-reel {
+            animation: spinReel 2s linear infinite;
+        }
+        
+        @keyframes spinReel {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        /* Cassette Holes */
+        .cassette-holes {
+            position: absolute;
+            top: 75px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+        }
+        
+        .cassette-hole {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #1a202c;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        
+        @media (max-width: 768px) {
+            .songs-section-title {
+                font-size: 2rem;
+                margin-bottom: 40px;
+            }
+            
+            .cassettes-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+            }
+            
+            .cassette-tape {
+                width: 180px;
+                height: 115px;
+            }
+            
+            .cassette-song-title {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Ready for 2026 Section */
+        .ready-section {
+            padding: 100px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--cream);
+            position: relative;
+        }
+        
+        /* Corner Cat Decorations */
+        .corner-cat {
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            object-fit: contain;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .corner-cat.top-left {
+            top: 20px;
+            left: 20px;
+        }
+        
+        .corner-cat.top-right {
+            top: 20px;
+            right: 20px;
+        }
+        
+        .corner-cat.middle-left {
+            top: 50%;
+            transform: translateY(-50%);
+            left: 20px;
+        }
+        
+        .corner-cat.middle-right {
+            top: 50%;
+            transform: translateY(-50%);
+            right: 20px;
+        }
+        
+        /* Page 1 - Envelope Page */
+        .page-1 {
+            z-index: 100;
+            background: transparent;
+        }
+        
+        .page-1.active {
+            z-index: 100;
+        }
+        
+        .ready-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        .ferrero-wrapper {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .ferrero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+        }
+        
+        .ready-text {
+            font-family: 'Mountains of Christmas', cursive;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .ready-subtext {
+            font-family: 'Caveat', cursive;
+            font-size: 1.5rem;
+            color: #4b5563;
+            text-align: center;
+            margin-top: -20px;
+        }
+        
+        /* IGNITE THE SPARK Button */
+        .ignite-button {
+            background: transparent;
+            border: 3px solid #D4AF37;
+            color: #D4AF37;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 15px 40px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+        }
+        
+        .ignite-button:hover {
+            background: rgba(212, 175, 55, 0.1);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .ignite-button:active {
+            transform: translateY(0);
+        }
+        
+        .sparkle-icon {
+            font-size: 1.2rem;
+        }
+        
+        /* I Love You Message */
+        .love-message-container {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(2, 6, 23, 0.95);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 2s ease-in-out;
+        }
+        
+        .love-message-container.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .love-message {
+            font-family: 'Mountains of Christmas', cursive;
+            font-size: 5rem;
+            font-weight: 700;
+            color: #FFD700;
+            text-align: center;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 215, 0, 0.5);
+            animation: loveMessagePulse 2s ease-in-out infinite;
+            z-index: 10001;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .love-message-intro {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #FFD700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 0 40px rgba(255, 215, 0, 0.4);
+        }
+        
+        @keyframes loveMessagePulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        /* Falling Hearts */
+        .heart {
+            position: fixed;
+            top: -20px;
+            color: #ff6b9d;
+            font-size: 20px;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.8;
+        }
+        
+        .heart-fall {
+            animation: heartFall linear infinite;
+        }
+        
+        @keyframes heartFall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .hearts-container {
+            position: fixed;
+            inset: 0;
+            z-index: 9998;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        @media (max-width: 768px) {
+            .ready-text {
+                font-size: 2rem;
+            }
+            
+            .ready-subtext {
+                font-size: 1.25rem;
+            }
+            
+            .ferrero-wrapper {
+                width: 250px;
+                height: 350px;
+            }
+            
+            .corner-cat {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .corner-cat.top-left,
+            .corner-cat.top-right {
+                top: 10px;
+            }
+            
+            .corner-cat.middle-left,
+            .corner-cat.middle-right {
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            
+            .corner-cat.top-left,
+            .corner-cat.middle-left {
+                left: 10px;
+            }
+            
+            .corner-cat.top-right,
+            .corner-cat.middle-right {
+                right: 10px;
+            }
+            
+            .ignite-button {
+                font-size: 0.9rem;
+                padding: 12px 30px;
+            }
+            
+            .love-message {
+                font-size: 3rem;
+            }
+            
+            .love-message-intro {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sky Gradient Background -->
+    <div class="sky-gradient"></div>
+    
+    <!-- TV Noise Overlay -->
+    <div class="tv-noise-overlay"></div>
+    
+    <!-- Stars -->
+    <div id="stars-container"></div>
+    
+    <!-- Page 1: Envelope Page -->
+    <section class="page page-1 active" id="page1">
+        <div class="envelope-container" id="envelopeContainer">
+            <div class="envelope" id="envelope">
+                <div class="envelope-body"></div>
+                <div class="envelope-flap"></div>
+            </div>
+        </div>
+        
+        <!-- Card Wrapper -->
+        <div class="card-wrapper" id="cardWrapper">
+        <div class="card" id="card">
+            <div class="card-pattern"></div>
+            <div class="card-content">
+                <div>
+                    <h1 class="card-title font-title">
+                        HAPPY NEW YEAR 2026<br>MANASVI BABY!!
+                    </h1>
+                    <p class="card-subtitle font-handwritten">
+                        Thanks for being part of my 2025, now let's make 2026 even better!
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <p>Continue to see more surprises!</p>
+                    <p class="card-footer-text">Made with care ✨</p>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    
+    <!-- Page 2: Polaroid Flip Cards Section -->
+    <section class="page page-2" id="polaroidSection">
+        <div class="polaroid-section">
+        <h2 class="polaroid-section-title">A Few Things I Want To Say To You</h2>
+        <div class="polaroid-cards-container">
+            <!-- Card 1: Cat with Santa Hat -->
+            <div class="polaroid-card-wrapper">
+                <div class="polaroid-card" data-card="1">
+                    <div class="polaroid-card-front">
+                        <div class="polaroid-image-container">
+                            <img src="https://media.tenor.com/fusk7TJ28tIAAAAi/cat.gif" alt="Cat" class="polaroid-image">
+                        </div>
+                        <div class="polaroid-label">A Thought</div>
+                    </div>
+                    <div class="polaroid-card-back">
+                        <div class="polaroid-back-content">
+                            <div class="polaroid-back-title">A Thought:</div>
+                            <div class="polaroid-back-message">you add colors to my life and with YOU everything seems amazing</div>
+                            <div class="polaroid-emoji">✨✨</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 2: Cat in Gift Box -->
+            <div class="polaroid-card-wrapper">
+                <div class="polaroid-card" data-card="2">
+                    <div class="polaroid-card-front">
+                        <div class="polaroid-image-container">
+                            <img src="https://media.tenor.com/tHobg1qZ6J8AAAAi/cat-heart.gif" alt="Cat with Heart" class="polaroid-image">
+                        </div>
+                        <div class="polaroid-label">Just Saying</div>
+                    </div>
+                    <div class="polaroid-card-back">
+                        <div class="polaroid-back-content">
+                            <div class="polaroid-back-title">Just Saying:</div>
+                            <div class="polaroid-back-message">I love you most! and Ur needed , appreciated and you add value to everyone's lives more than you know</div>
+                            <div class="polaroid-emoji">❤️</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 3: New Year Voucher -->
+            <div class="polaroid-card-wrapper">
+                <div class="polaroid-card" data-card="3">
+                    <div class="polaroid-card-front">
+                        <div class="polaroid-image-container">
+                            <img src="https://media1.tenor.com/m/c_pjFrFrN_UAAAAC/cute.gif" alt="Cute Cat" class="polaroid-image">
+                        </div>
+                        <div class="polaroid-label">Special Gift</div>
+                    </div>
+                    <div class="polaroid-card-back">
+                        <div class="polaroid-back-content">
+                            <div class="polaroid-back-title">New Year Voucher:</div>
+                            <div class="polaroid-back-message">unlimited kisses and hugs valid all year</div>
+                            <div class="polaroid-emoji">😊</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    
+    <!-- Page 3: Songs Section with Cassette Tapes -->
+    <section class="page page-3" id="songsSection">
+        <div class="songs-section">
+        <h2 class="songs-section-title">Songs That Match Your Vibes</h2>
+        <div class="cassettes-container">
+            <!-- Cassette 1 -->
+            <div class="cassette-wrapper">
+                <div class="cassette-tape" data-cassette="1" data-song-url="https://soundcloud.com/jgeehye/sets/all-i-dream-of-is-your-eyes">
+                    <div class="cassette-label">
+                        <div class="cassette-song-title">All I Dream Of Is Your Eyes (I love you so much)</div>
+                    </div>
+                    <div class="cassette-holes">
+                        <div class="cassette-hole"></div>
+                        <div class="cassette-hole"></div>
+                    </div>
+                    <div class="cassette-reels">
+                        <div class="cassette-reel"></div>
+                        <div class="cassette-reel"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cassette 2 -->
+            <div class="cassette-wrapper">
+                <div class="cassette-tape" data-cassette="2" data-song-url="https://soundcloud.com/berbzaloveee/double-decker-bus">
+                    <div class="cassette-label">
+                        <div class="cassette-song-title">Double Decker Bus (I love you so much)</div>
+                    </div>
+                    <div class="cassette-holes">
+                        <div class="cassette-hole"></div>
+                        <div class="cassette-hole"></div>
+                    </div>
+                    <div class="cassette-reels">
+                        <div class="cassette-reel"></div>
+                        <div class="cassette-reel"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cassette 3 -->
+            <div class="cassette-wrapper">
+                <div class="cassette-tape" data-cassette="3" data-song-url="https://soundcloud.com/eyedress/eyedress-something-about-you-feat-dent-may">
+                    <div class="cassette-label">
+                        <div class="cassette-song-title">Something About You (I love you so much)</div>
+                    </div>
+                    <div class="cassette-holes">
+                        <div class="cassette-hole"></div>
+                        <div class="cassette-hole"></div>
+                    </div>
+                    <div class="cassette-reels">
+                        <div class="cassette-reel"></div>
+                        <div class="cassette-reel"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    
+    <!-- Page 4: Ready for 2026 Section -->
+    <section class="page page-4" id="readySection">
+        <div class="ready-section">
+        <!-- Corner Cat Decorations -->
+        <img src="https://media.tenor.com/WlJsOVX2lysAAAAm/cat-tongue-cat.webp" alt="Cat" class="corner-cat top-left">
+        <img src="https://media.tenor.com/Bav2QWeveKgAAAAm/best-banana-cat.webp" alt="Cat" class="corner-cat top-right">
+        <img src="https://media.tenor.com/lfDATg4Bhc0AAAAM/happy-cat.gif" alt="Cat" class="corner-cat middle-left">
+        <img src="https://media.tenor.com/itAO_HVcoSgAAAAm/kutusita-nyanko-cat.webp" alt="Cat" class="corner-cat middle-right">
+        
+        <div class="ready-content">
+            <div class="ferrero-wrapper">
+                <img src="https://media1.tenor.com/m/rz4kOurhQ0QAAAAd/big-mouth-cat.gif" alt="Big Mouth Cat" class="ferrero-image" id="ferreroImage">
+            </div>
+            <div>
+                <h2 class="ready-text">Ready for 2026?</h2>
+                <p class="ready-subtext">A new chapter is waiting to be written.... lets make it amazing! ... scroll down to see a surprise!</p>
+            </div>
+            <button class="ignite-button" id="igniteButton">
+                <span>IGNITE THE SPARK</span>
+                <span class="sparkle-icon">✨</span>
+            </button>
+        </div>
+        </div>
+    </section>
+    
+    <!-- Hearts Container -->
+    <div class="hearts-container" id="heartsContainer"></div>
+    
+    <!-- I Love You Message Container -->
+    <div class="love-message-container" id="loveMessageContainer">
+        <div class="love-message">
+            <div class="love-message-intro">HAPPY NEW YEAR!!  THANK YOU BEING THERE FOR ME<3 AND....</div>
+            <div>I Love You</div>
+        </div>
+    </div>
+    
+    <!-- Sparkle Particles Container -->
+    <div id="sparkles-container"></div>
+    
+    <!-- Rocket Container -->
+    <div class="rocket-container" id="rocketContainer"></div>
+    
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+        
+        // Create Stars
+        function createStars() {
+            const container = document.getElementById('stars-container');
+            const numStars = 100;
+            
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star-blink';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                container.appendChild(star);
+            }
+        }
+        
+        // Create Sparkle Particles (Hearts for romantic vibe)
+        function createSparkles() {
+            const container = document.getElementById('sparkles-container');
+            const particles = ['❤️'];
+            const numParticles = 50;
+            
+            for (let i = 0; i < numParticles; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle sparkle-fall';
+                sparkle.textContent = particles[Math.floor(Math.random() * particles.length)];
+                
+                const left = Math.random() * 100;
+                const duration = 5 + Math.random() * 10;
+                const delay = Math.random() * 5;
+                const size = 12 + Math.random() * 12;
+                
+                sparkle.style.left = left + '%';
+                sparkle.style.fontSize = size + 'px';
+                sparkle.style.animationDuration = duration + 's';
+                sparkle.style.animationDelay = delay + 's';
+                
+                container.appendChild(sparkle);
+            }
+        }
+        
+        // Create Rocket Firework
+        function createRocketFirework(x, y) {
+            const container = document.getElementById('rocket-container');
+            
+            // Create rocket
+            const rocket = document.createElement('div');
+            rocket.className = 'realistic-rocket';
+            rocket.style.left = x + 'px';
+            rocket.style.bottom = y + 'px';
+            
+            const tail = document.createElement('div');
+            tail.className = 'rocket-spark-tail';
+            rocket.appendChild(tail);
+            
+            const head = document.createElement('div');
+            head.className = 'rocket-glow-head';
+            rocket.appendChild(head);
+            
+            container.appendChild(rocket);
+            
+            // Animate rocket upward
+            const targetY = window.innerHeight + 100;
+            const startY = y;
+            const distance = targetY - startY;
+            const duration = 1500;
+            const startTime = Date.now();
+            
+            function animate() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const currentY = startY + (distance * progress);
+                rocket.style.bottom = currentY + 'px';
+                
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                } else {
+                    // Create explosion
+                    createExplosion(x, targetY);
+                    rocket.remove();
+                }
+            }
+            
+            animate();
+        }
+        
+        // Create Explosion
+        function createExplosion(x, y) {
+            const container = document.getElementById('rocket-container');
+            const explosion = document.createElement('div');
+            explosion.className = 'explosion-container';
+            explosion.style.left = x + 'px';
+            explosion.style.bottom = y + 'px';
+            
+            // Flash
+            const flash = document.createElement('div');
+            flash.className = 'explosion-flash';
+            flash.style.left = '-15px';
+            flash.style.bottom = '0px';
+            explosion.appendChild(flash);
+            
+            // Particles
+            const colors = ['#fbbf24', '#ef4444', '#f97316', '#ec4899', '#8b5cf6', '#3b82f6'];
+            const numParticles = 30;
+            
+            for (let i = 0; i < numParticles; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'realistic-particle';
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.backgroundColor = color;
+                particle.style.color = color;
+                
+                const angle = (Math.PI * 2 * i) / numParticles;
+                const distance = 50 + Math.random() * 50;
+                const finalX = Math.cos(angle) * distance;
+                const finalY = Math.sin(angle) * distance;
+                
+                particle.style.left = '0px';
+                particle.style.bottom = '0px';
+                
+                const duration = 800 + Math.random() * 400;
+                particle.style.animation = `particleExplode ${duration}ms ease-out forwards`;
+                particle.style.setProperty('--final-x', finalX + 'px');
+                particle.style.setProperty('--final-y', finalY + 'px');
+                
+                explosion.appendChild(particle);
+            }
+            
+            // Add particle animation
+            if (!document.getElementById('particle-explode-style')) {
+                const style = document.createElement('style');
+                style.id = 'particle-explode-style';
+                style.textContent = `
+                    @keyframes particleExplode {
+                        0% {
+                            transform: translate(0, 0) scale(1);
+                            opacity: 1;
+                        }
+                        100% {
+                            transform: translate(var(--final-x), var(--final-y)) scale(0);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            container.appendChild(explosion);
+            
+            setTimeout(() => {
+                explosion.remove();
+            }, 1500);
+        }
+        
+        // Page Navigation System
+        let currentPage = 1;
+        const totalPages = 4;
+        
+        function showPage(pageNumber) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active', 'prev');
+            });
+            
+            // Show current page
+            const currentPageElement = document.querySelector(`.page-${pageNumber}`);
+            if (currentPageElement) {
+                currentPageElement.classList.add('active');
+            }
+            
+            currentPage = pageNumber;
+        }
+        
+        function nextPage() {
+            if (currentPage < totalPages) {
+                showPage(currentPage + 1);
+            }
+        }
+        
+        // Envelope Click Handler
+        function handleEnvelopeClick() {
+            const envelope = document.getElementById('envelope');
+            const cardWrapper = document.getElementById('cardWrapper');
+            const card = document.getElementById('card');
+            
+            // Add open animation to envelope
+            envelope.classList.add('open');
+            
+            // Show and animate card simultaneously
+            cardWrapper.classList.add('show');
+            card.classList.add('card-animation');
+            
+            // Launch some fireworks
+            setTimeout(() => {
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        const x = Math.random() * window.innerWidth;
+                        const y = Math.random() * 100;
+                        createRocketFirework(x, y);
+                    }, i * 300);
+                }
+            }, 1000);
+            
+            // Remove click handler after first click
+            document.getElementById('envelopeContainer').style.pointerEvents = 'none';
+        }
+        
+        // Add click handler to pages to advance (except interactive elements)
+        function initPageNavigation() {
+            document.querySelectorAll('.page').forEach(page => {
+                page.addEventListener('click', function(e) {
+                    // Don't advance if clicking on interactive elements
+                    if (e.target.closest('.polaroid-card, .cassette-tape, .ignite-button, .envelope-container')) {
+                        return;
+                    }
+                    // For page 1, don't advance if clicking on card-wrapper (card is on page 1)
+                    if (page.classList.contains('page-1') && e.target.closest('.card-wrapper')) {
+                        return;
+                    }
+                    nextPage();
+                });
+            });
+        }
+        
+        // Polaroid Card Flip Handler
+        function initPolaroidCards() {
+            const cards = document.querySelectorAll('.polaroid-card');
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.classList.toggle('flipped');
+                });
+            });
+        }
+        
+        // Cassette Tape Handler
+        function initCassetteTapes() {
+            const cassettes = document.querySelectorAll('.cassette-tape');
+            
+            cassettes.forEach(cassette => {
+                cassette.addEventListener('click', function() {
+                    const songUrl = this.getAttribute('data-song-url');
+                    
+                    // Add glow or wiggle effect for visual feedback
+                    const effect = Math.random() > 0.5 ? 'glow' : 'wiggle';
+                    this.classList.add(effect);
+                    
+                    setTimeout(() => {
+                        this.classList.remove(effect);
+                    }, 600);
+                    
+                    // If there's a song URL, open it in a new tab
+                    if (songUrl && songUrl !== '') {
+                        // Remove utm parameters for cleaner URL
+                        const cleanUrl = songUrl.split('?')[0];
+                        window.open(cleanUrl, '_blank', 'noopener,noreferrer');
+                    }
+                });
+            });
+        }
+        
+        // Create Falling Hearts
+        function createFallingHearts() {
+            const container = document.getElementById('heartsContainer');
+            const hearts = ['❤️', '💖', '💕', '💗', '💓', '💝', '💞', '💘'];
+            const numHearts = 30;
+            
+            // Clear existing hearts
+            container.innerHTML = '';
+            
+            for (let i = 0; i < numHearts; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart heart-fall';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                
+                const left = Math.random() * 100;
+                const duration = 4 + Math.random() * 6;
+                const delay = Math.random() * 3;
+                const size = 16 + Math.random() * 12;
+                
+                heart.style.left = left + '%';
+                heart.style.fontSize = size + 'px';
+                heart.style.animationDuration = duration + 's';
+                heart.style.animationDelay = delay + 's';
+                
+                container.appendChild(heart);
+            }
+        }
+        
+        // Grand Finale - Full Screen Fireworks and I Love You Message
+        function triggerGrandFinale() {
+            const loveMessageContainer = document.getElementById('loveMessageContainer');
+            const igniteButton = document.getElementById('igniteButton');
+            
+            // Disable button
+            igniteButton.disabled = true;
+            igniteButton.style.opacity = '0.5';
+            igniteButton.style.cursor = 'not-allowed';
+            
+            // Launch full-screen fireworks
+            const numFireworks = 15;
+            const fireworksDelay = 5000; // 5 seconds of fireworks
+            
+            for (let i = 0; i < numFireworks; i++) {
+                setTimeout(() => {
+                    const x = Math.random() * window.innerWidth;
+                    const y = Math.random() * 100;
+                    createRocketFirework(x, y);
+                }, i * (fireworksDelay / numFireworks));
+            }
+            
+            // Start creating hearts
+            createFallingHearts();
+            
+            // After fireworks, fade in the I Love You message
+            setTimeout(() => {
+                loveMessageContainer.classList.add('show');
+                
+                // Continue creating hearts periodically
+                setInterval(() => {
+                    createFallingHearts();
+                }, 8000);
+            }, fireworksDelay);
+        }
+        
+        // Initialize Ready Section
+        function initReadySection() {
+            const igniteButton = document.getElementById('igniteButton');
+            if (igniteButton) {
+                igniteButton.addEventListener('click', triggerGrandFinale);
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createStars();
+            createSparkles();
+            
+            // Add click event to envelope
+            document.getElementById('envelopeContainer').addEventListener('click', handleEnvelopeClick);
+            
+            // Initialize polaroid cards
+            initPolaroidCards();
+            
+            // Initialize cassette tapes
+            initCassetteTapes();
+            
+            // Initialize ready section
+            initReadySection();
+            
+            // Initialize page navigation
+            initPageNavigation();
+            
+            // Launch some initial fireworks after a delay
+            setTimeout(() => {
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(() => {
+                        const x = Math.random() * window.innerWidth;
+                        const y = Math.random() * 50;
+                        createRocketFirework(x, y);
+                    }, i * 500);
+                }
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
+
